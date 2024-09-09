@@ -6,7 +6,6 @@ Purpose: Count Words
 """
 import argparse
 import sys
-import os
 
 def main():
     """ Count the words! """
@@ -22,25 +21,29 @@ def main():
         bc = 0
         for line in file_handle:
             lc += 1
-            wc += len(line.split(' '))
-        print(f'{lc:8} {wc:8} {bc:8} {file_handle.name}')
+            wc += len(line.split())
+            bc += len(line)
+        print(f'{lc:8}{wc:8}{bc:8} {file_handle.name}')
         total_lc += lc
         total_wc += wc
         total_bc += bc
-    print(f'{total_lc:8} {total_wc:8} {total_bc:8} total')
+    if len(files) > 1:
+        print(f'{total_lc:8}{total_wc:8}{total_bc:8} total')
 
 
 # ---------------------------------------------------
 def getArgs():
     """ Get Args """
-    parser = argparse.ArgumentParser(description="Count Words",formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument("file", 
-                        nargs='*', 
-                        help="Input file(s) or text.", 
-                        type = argparse.FileType('rt'), # This returns a list of open file handles. 
-                        default=[sys.stdin] )
+    parser = argparse.ArgumentParser(description="Count Words",
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument("file",
+                        nargs='*',
+                        help="Input file(s) or text.",
+                        type = argparse.FileType('rt'), # This returns a list of open file handles.
+                        default=[sys.stdin])
     args = parser.parse_args()
     return args
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     main()
+    
