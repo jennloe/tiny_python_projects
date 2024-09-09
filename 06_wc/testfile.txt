@@ -1,0 +1,8 @@
+Here is a test file.  I am thinking
+about elephants.  And code processing.
+I need to get Python to count all the iterations
+of the polynomia preconditioner.
+
+
+see? 
+Here is a cat at my feet.
