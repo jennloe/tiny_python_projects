@@ -15,14 +15,18 @@ def main():
     args = get_args()
     letters = [s.upper() for s in args.letters]
     abc_dict = {}
-    for line in args.file:
-        abc_dict[line[0].upper()] = line.rstrip()
+    # for line in args.file:
+        # abc_dict[line[0].upper()] = line.rstrip()
+    # Alternate method: 
+    abc_dict = {line[0].upper(): line.rstrip() for line in args.file}
     for my_letter in letters:
-        line = abc_dict.get(my_letter)
-        if line:
-            print(line)
-        else:
-            print(f'I do not know "{my_letter}".')
+        # line = abc_dict.get(my_letter)
+        # if line:
+        #     print(line)
+        # else:
+        #     print(f'I do not know "{my_letter}".')
+        # Shorter way:
+        print(abc_dict.get(my_letter,f'I do not know "{my_letter}".'))
 
 
 def get_args():
