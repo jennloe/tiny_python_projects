@@ -12,13 +12,9 @@ def main():
     args = getArgs()
     files = args.file
 
-    total_lc = 0
-    total_wc = 0
-    total_bc = 0
+    total_lc, total_wc, total_bc = 0, 0, 0
     for file_handle in files:
-        lc = 0
-        wc = 0
-        bc = 0
+        lc, wc, bc = 0, 0, 0
         for line in file_handle:
             lc += 1
             wc += len(line.split())
@@ -41,8 +37,7 @@ def getArgs():
                         help="Input file(s) or text.",
                         type = argparse.FileType('rt'), # This returns a list of open file handles.
                         default=[sys.stdin])
-    args = parser.parse_args()
-    return args
+    return parser.parse_args()
 
 if __name__ == "__main__":
     main()
