@@ -19,7 +19,7 @@ def main():
     if os.path.isfile(text):
         fh = open(text)
         text = fh.read()
-        fh.close 
+        fh.close()
 
     # Solution 1: 
     # for x in text:
@@ -68,7 +68,8 @@ def get_args():
                         type=str,
                         help="The vowel to substitute.",
                         default='a',
-                        choices=['a','e','i','o','u'])
+                        choices=list('aeiou'))
+                        #choices=['a','e','i','o','u'])
     return parser.parse_args()
 
 
