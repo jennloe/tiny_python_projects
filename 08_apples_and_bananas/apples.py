@@ -16,10 +16,6 @@ def main():
 
     v = args.vowel
     text = args.text
-    if os.path.isfile(text):
-        fh = open(text)
-        text = fh.read()
-        fh.close()
 
     # Solution 1: 
     # for x in text:
@@ -58,7 +54,11 @@ def main():
     jump = {'a':v, 'e':v, 'i':v, 'o':v, 'u': v, 'A':V, 'E':V, 'I':V, 'O':V, 'U':V}
     print(text.translate(str.maketrans(jump)))
 
+
 def get_args():
+    """
+    Get input args from user. 
+    """
     parser = argparse.ArgumentParser(description= "Give a vowel and text to make a silly song.",
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("text",
@@ -70,7 +70,11 @@ def get_args():
                         default='a',
                         choices=list('aeiou'))
                         #choices=['a','e','i','o','u'])
-    return parser.parse_args()
+    args = parser.parse_args()
+    if os.path.isfile(text):
+        with open(text) as fh:
+            text = fh.read()
+    return args
 
 
 if __name__ == "__main__":
