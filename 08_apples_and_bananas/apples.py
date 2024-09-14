@@ -31,8 +31,27 @@ def main():
     #         print(x,end='')
     # print()
 
+    # Solution 1.5: 
+    # new = ''
+    # for x in text:
+    #     if x in 'aeiou':
+    #         new += v
+    #     elif x in 'AEIOU':
+    #         new += v.upper()
+    #     else:
+    #         new += x
+    # print(new)
+
     # Solution 2: 
-    print(''.join([v if x in 'aeiou' else v.upper() if x in 'AEIOU' else x for x in text]))
+    # print(''.join([v if x in 'aeiou' else v.upper() if x in 'AEIOU' else x for x in text]))
+
+    # Solution 3:
+    new = text
+    for x in 'aeiou':
+        new = new.replace(x,v)
+    for x in 'AEIOU':
+        new = new.replace(x,v.upper())
+    print(new)
 
 def get_args():
     parser = argparse.ArgumentParser(description= "Give a vowel and text to make a silly song.",
