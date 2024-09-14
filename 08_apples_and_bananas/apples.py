@@ -46,12 +46,17 @@ def main():
     # print(''.join([v if x in 'aeiou' else v.upper() if x in 'AEIOU' else x for x in text]))
 
     # Solution 3:
-    new = text
-    for x in 'aeiou':
-        new = new.replace(x,v)
-    for x in 'AEIOU':
-        new = new.replace(x,v.upper())
-    print(new)
+    # new = text
+    # for x in 'aeiou':
+    #     new = new.replace(x,v)
+    # for x in 'AEIOU':
+    #     new = new.replace(x,v.upper())
+    # print(new)
+
+    # Solution 4:
+    V = v.upper()
+    jump = {'a':v, 'e':v, 'i':v, 'o':v, 'u': v, 'A':V, 'E':V, 'I':V, 'O':V, 'U':V}
+    print(text.translate(str.maketrans(jump)))
 
 def get_args():
     parser = argparse.ArgumentParser(description= "Give a vowel and text to make a silly song.",
