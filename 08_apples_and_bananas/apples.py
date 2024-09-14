@@ -21,14 +21,18 @@ def main():
         text = fh.read()
         fh.close 
 
-    for x in text:
-        if x in 'aeiou':
-            print(v.lower(), end='')
-        elif x in 'AEIOU':
-            print(v.upper(), end='')
-        else:
-            print(x,end='')
-    print()
+    # Solution 1: 
+    # for x in text:
+    #     if x in 'aeiou':
+    #         print(v.lower(), end='')
+    #     elif x in 'AEIOU':
+    #         print(v.upper(), end='')
+    #     else:
+    #         print(x,end='')
+    # print()
+
+    # Solution 2: 
+    print(''.join([v if x in 'aeiou' else v.upper() if x in 'AEIOU' else x for x in text]))
 
 def get_args():
     parser = argparse.ArgumentParser(description= "Give a vowel and text to make a silly song.",
