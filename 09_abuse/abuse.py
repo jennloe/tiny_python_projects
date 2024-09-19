@@ -16,21 +16,20 @@ def main():
     args = get_args()
     random.seed(args.seed)
     num_insults = args.number
-    adjs = "bankrupt base caterwauling corrupt cullionly detestable dishonest false filthsome filthy" \
-            "foolish foul gross heedless indistinguishable infected insatiate irksome lascivious" \
-            "lecherous loathsome lubbery old peevish rascaly rotten ruinous scurilous scurvy slanderous" \
-            "sodden-witted thin-faced toad-spotted unmannered vile wall-eyed"
+    adjs = """bankrupt base caterwauling corrupt cullionly detestable dishonest false filthsome filthy
+            foolish foul gross heedless indistinguishable infected insatiate irksome lascivious
+            lecherous loathsome lubbery old peevish rascaly rotten ruinous scurilous scurvy slanderous
+            sodden-witted thin-faced toad-spotted unmannered vile wall-eyed"""
     adjs = adjs.split()
-    nouns = "Judas Satan ape ass barbermonger beggar block boy braggart butt carbuncle coward" \
-            "coxcomb cur dandy degenerate fiend fishmonger fool gull harpy jack jolthead knave liar" \
-            "lunatic maw milksop minion ratcatcher recreant rogue scold slave swine traitor varlet" \
-            "villain worm"
+    nouns = """Judas Satan ape ass barbermonger beggar block boy braggart butt carbuncle coward
+            coxcomb cur dandy degenerate fiend fishmonger fool gull harpy jack jolthead knave liar
+            lunatic maw milksop minion ratcatcher recreant rogue scold slave swine traitor varlet
+            villain worm"""
     nouns = nouns.split()
-    for i in range(num_insults):
+    for _ in range(num_insults):
         print(f"You {', '.join(random.sample(adjs, args.adjectives))} {random.choice(nouns)}!")
         
-
-
+        
 def get_args():
     parser = argparse.ArgumentParser(description="Create random insults.",
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -55,7 +54,12 @@ def get_args():
                         help = "Random seed.",
                         default=None
                         )
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args.adjectives < 1:
+        parser.error(f'--adjectives "{args.adjectives}" must be > 0')
+    if args.number < 1:
+        parser.error(f'--number "{args.number}" must be > 0')
+    return args
 
 
 if __name__ == "__main__":
