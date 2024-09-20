@@ -8,13 +8,25 @@ Purpose: Play telephone with the computer
 import argparse
 import os
 import random
+import string
 
 
 def main():
+    # TODO: Start at p. 170 "Randomly sampling characters."
     args = get_args()
     random.seed(args.seed)
+    num_changes = round(args.mutations * len(args.text))
+    alpha = string.ascii_letters + string.punctuation
+    text = list(args.text)
+    rand_idxs = random.sample(range(len(args.text)),num_changes)
+    rand_letters = random.sample(alpha,num_changes)
+    #text[rand_idxs] = rand_letters
+    #text = [rand_letters[i] if i in rand_idxs else text[i] for i in range(len(args.text))]
+    for i in range(len(rand_idxs)): text[rand_idxs[i]] = rand_letters[i] 
+    blank = ''
     print(f'You said: "{args.text}"')
-    print(f'I heard : "{args.text}"')
+    print(f'I heard : "{blank.join(text)}"')
+
     
 def get_args():
     parser = argparse.ArgumentParser(description="Mutate a string.", 
