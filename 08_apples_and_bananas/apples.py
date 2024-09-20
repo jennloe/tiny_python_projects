@@ -48,11 +48,22 @@ def main():
     # for x in 'AEIOU':
     #     new = new.replace(x,v.upper())
     # print(new)
+    
+    # Solution 3.5:
+    # new = text
+    # for x in 'aeiou':
+    #     new = new.replace(x,v).replace(x.upper(), v.upper())
+    # print(new)
 
     # Solution 4:
+    # V = v.upper()
+    # jump = {'a':v, 'e':v, 'i':v, 'o':v, 'u': v, 'A':V, 'E':V, 'I':V, 'O':V, 'U':V}
+    # print(text.translate(str.maketrans(jump)))
+    
+    # Solution 4.5
     V = v.upper()
-    jump = {'a':v, 'e':v, 'i':v, 'o':v, 'u': v, 'A':V, 'E':V, 'I':V, 'O':V, 'U':V}
-    print(text.translate(str.maketrans(jump)))
+    # Put in two strings, and it makes the dictionary for you. v*5 = 'vvvvv'
+    print(text.translate(str.maketrans('aeiouAEIOU', v*5 + V*5)))
 
 
 def get_args():
@@ -71,9 +82,9 @@ def get_args():
                         choices=list('aeiou'))
                         #choices=['a','e','i','o','u'])
     args = parser.parse_args()
-    if os.path.isfile(text):
-        with open(text) as fh:
-            text = fh.read()
+    if os.path.isfile(args.text):
+        with open(args.text) as fh:
+            args.text = fh.read()
     return args
 
 
