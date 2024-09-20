@@ -12,20 +12,17 @@ import string
 
 
 def main():
-    # TODO: Start at p. 170 "Randomly sampling characters."
     args = get_args()
     random.seed(args.seed)
     num_changes = round(args.mutations * len(args.text))
     alpha = string.ascii_letters + string.punctuation
+    
     text = list(args.text)
     rand_idxs = random.sample(range(len(args.text)),num_changes)
-    rand_letters = random.sample(alpha,num_changes)
-    #text[rand_idxs] = rand_letters
-    #text = [rand_letters[i] if i in rand_idxs else text[i] for i in range(len(args.text))]
-    for i in range(len(rand_idxs)): text[rand_idxs[i]] = rand_letters[i] 
-    blank = ''
+    for i in range(len(rand_idxs)): 
+        text[rand_idxs[i]] = random.choice(alpha.replace(text[rand_idxs[i]],''))
     print(f'You said: "{args.text}"')
-    print(f'I heard : "{blank.join(text)}"')
+    print(f'I heard : "{"".join(text)}"')
 
     
 def get_args():
@@ -50,7 +47,9 @@ def get_args():
     if os.path.isfile(args.text):
         with open(args.text) as fh:
             args.text = fh.read()
-    if args.mutations < 0 or args.mutations > 1:
+            
+    # if args.mutations < 0 or args.mutations > 1:
+    if not 0 <= args.mutations <= 1:
         parser.error(f'--mutations "{args.mutations}" must be between 0 and 1.')
     return args
     
