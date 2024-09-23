@@ -40,6 +40,12 @@ def main():
 
     # Solution 2: 
     # print(''.join([v if x in 'aeiou' else v.upper() if x in 'AEIOU' else x for x in text]))
+    
+    # Solution 2.5:
+    # def new_char(x):
+    #     # Note this function uses v that already exists in main. 
+    #     return v if x in 'aeiou' else v.upper() if x in 'AEIOU' else x
+    # print(''.join(new_char(x) for x in text))
 
     # Solution 3:
     # new = text
@@ -61,10 +67,29 @@ def main():
     # print(text.translate(str.maketrans(jump)))
     
     # Solution 4.5
-    V = v.upper()
-    # Put in two strings, and it makes the dictionary for you. v*5 = 'vvvvv'
-    print(text.translate(str.maketrans('aeiouAEIOU', v*5 + V*5)))
+    # V = v.upper()
+    # # Put in two strings, and it makes the dictionary for you. v*5 = 'vvvvv'
+    # print(text.translate(str.maketrans('aeiouAEIOU', v*5 + V*5)))
 
+    # Solution 5: 
+    # def new_char(x):
+    #     # Note this function uses v that already exists in main. 
+    #     return v if x in 'aeiou' else v.upper() if x in 'AEIOU' else x
+    # # Note that map expects a list, so 'text' will be coerced into a list. 
+    # print(''.join(map(new_char,text)))
+    
+    # Solution 5.5: 
+    # print(''.join(map(lambda x: v if x in 'aeiou' else v.upper() if x in 'AEIOU' else x, text)))
+    
+    # Solution 6:
+    # import re
+    # text = re.sub('[aeiou]',v,text)
+    # text = re.sub('[AEIOU]',v.upper(),text)
+    # print(text)
+    
+    # Solution 6.5: 
+    import re
+    print(re.sub('[aeiou]',v, re.sub('[AEIOU]',v.upper(),text)))
 
 def get_args():
     """
