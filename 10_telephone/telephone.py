@@ -18,9 +18,16 @@ def main():
     alpha = ''.join(sorted(string.ascii_letters + string.punctuation))
 
     text = list(args.text)
-    rand_idxs = random.sample(range(len(args.text)),num_changes)
-    for i in range(len(rand_idxs)): 
-        text[rand_idxs[i]] = random.choice(alpha.replace(text[rand_idxs[i]],''))
+    
+    # My original way: 
+    # rand_idxs = random.sample(range(len(args.text)),num_changes)
+    # for i in range(len(rand_idxs)): 
+    #     text[rand_idxs[i]] = random.choice(alpha.replace(text[rand_idxs[i]],''))
+        
+    # Better way: 
+    for i in random.sample(range(len(args.text)),num_changes): 
+        text[i] = random.choice(alpha.replace(text[i],''))       
+
     print(f'You said: "{args.text}"')
     print(f'I heard : "{"".join(text)}"')
 
