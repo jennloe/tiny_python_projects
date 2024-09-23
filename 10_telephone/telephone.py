@@ -15,8 +15,8 @@ def main():
     args = get_args()
     random.seed(args.seed)
     num_changes = round(args.mutations * len(args.text))
-    alpha = string.ascii_letters + string.punctuation
-    
+    alpha = ''.join(sorted(string.ascii_letters + string.punctuation))
+
     text = list(args.text)
     rand_idxs = random.sample(range(len(args.text)),num_changes)
     for i in range(len(rand_idxs)): 
@@ -46,7 +46,7 @@ def get_args():
     args = parser.parse_args()
     if os.path.isfile(args.text):
         with open(args.text) as fh:
-            args.text = fh.read()
+            args.text = fh.read().rstrip()
             
     # if args.mutations < 0 or args.mutations > 1:
     if not 0 <= args.mutations <= 1:
