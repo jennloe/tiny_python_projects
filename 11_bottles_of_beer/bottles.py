@@ -11,14 +11,17 @@ import argparse
 def main():
     args = get_args()
 
+    # could also do reversed(range(args.num+1))
     for n in range(args.num,0,-1):
-        end = (f"{n-1} bottle{'s' if n - 1 > 1 else ''} of beer on the wall!\n" 
-                if n-1 > 0 else f"No more bottles of beer on the wall!")
-        print(
-            f"{n} bottle{'s' if n > 1 else ''} of beer on the wall,\n"
+        print(get_verse(n))
+        
+def get_verse(n):
+    end = (f"{n-1} bottle{'s' if n - 1 > 1 else ''} of beer on the wall!\n" 
+            if n-1 > 0 else f"No more bottles of beer on the wall!")
+    return (f"{n} bottle{'s' if n > 1 else ''} of beer on the wall,\n"
             f"{n} bottle{'s' if n > 1 else ''} of beer,\n"
-            f"Take one down, pass it around,\n"
-            +end)
+            f"Take one down, pass it around,\n" + end)
+            
 
 
 def get_args():
