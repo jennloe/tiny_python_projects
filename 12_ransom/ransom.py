@@ -34,7 +34,7 @@ def get_args():
     args = parser.parse_args()
     if os.path.isfile(args.text):
         with open(args.text) as fh:
-            args.text = fh.read()
+            args.text = fh.read().rstrip()
     return args
 
 
