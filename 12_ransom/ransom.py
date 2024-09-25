@@ -15,7 +15,7 @@ def main():
     """ Print the ransom note here. """
     args = get_args()
     random.seed(args.seed)
-    print(args.text)
+    print(''.join(map(lambda x: random.choice([x.lower(),x.upper()]),args.text)))
 
 
 def get_args():
