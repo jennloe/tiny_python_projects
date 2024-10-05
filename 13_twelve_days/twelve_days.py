@@ -10,9 +10,7 @@ import sys
 
 def main():
     args = get_args()
-    for i in range(1,args.num):
-        print(verse(i), "\n", sep='', file=args.outfile)
-    print(verse(args.num), sep='', file=args.outfile)
+    print('\n\n'.join([verse(i) for i in range(1,args.num+1)]), file=args.outfile)
 
 def verse(day):
     ordinal = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth",
