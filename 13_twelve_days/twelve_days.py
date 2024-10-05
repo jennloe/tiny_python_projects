@@ -10,8 +10,32 @@ import sys
 
 def main():
     args = get_args()
-    print("Hellow xmas")
-    print(f"{args.num} days of Christmas")
+    for i in range(1,args.num + 1):
+        print(verse(i), "\n",file=args.outfile)
+
+def verse(day):
+    ordinal = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth",
+               7: "seventh", 8: "eighth", 9: "ninth", 10: "tenth", 11: "eleventh", 12: "twelfth"}
+    phrase = ["partridge in a pear tree",
+              "Two turtle doves",
+              "Three French hens",
+              "Four calling birds",
+              "Five gold rings",
+              "Six geese a laying",
+              "Seven swans a swimming",
+              "Eight maids a milking",
+              "Nine ladies dancing",
+              "Ten lords a leaping",
+              "Eleven pipers piping",
+              "Twelve drummers drumming"]
+    myverse = f"On the {ordinal[day]} day of Christmas,\nMy true love gave to me,\n"
+    for i in range(day,1,-1):
+        myverse += f"{phrase[i-1]},\n"
+    if day == 1:
+        myverse += f"A {phrase[0]}."
+    else:
+        myverse += f"And a {phrase[0]}."
+    return myverse
 
 def get_args():
     parser = argparse.ArgumentParser(description="Sing the n days of Christmas",
@@ -29,7 +53,7 @@ def get_args():
                         default=sys.stdout)
     args = parser.parse_args()
     if args.num < 1 or args.num > 12:
-        parser.error(f'--num {"args.num"} must be between 1 and 12')
+        parser.error(f'--num "{args.num}" must be between 1 and 12')
     return args
 
 if __name__ == "__main__":
