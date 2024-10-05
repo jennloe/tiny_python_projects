@@ -28,9 +28,8 @@ def verse(day):
               "Eleven pipers piping",
               "Twelve drummers drumming"]
     myverse = f"On the {ordinal[day]} day of Christmas,\nMy true love gave to me,\n"
-    for i in range(day,1,-1):
-        myverse += f"{phrase[i-1]},\n"
-    myverse += ("A " if day == 1 else "And a ") + f"{phrase[0]}."
+    myverse += ',\n'.join([phrase[i-1] for i in range(day,1,-1)])
+    myverse += ("A " if day == 1 else ",\nAnd a ") + f"{phrase[0]}."
     return myverse
 
 def get_args():
