@@ -30,10 +30,7 @@ def verse(day):
     myverse = f"On the {ordinal[day]} day of Christmas,\nMy true love gave to me,\n"
     for i in range(day,1,-1):
         myverse += f"{phrase[i-1]},\n"
-    if day == 1:
-        myverse += f"A {phrase[0]}."
-    else:
-        myverse += f"And a {phrase[0]}."
+    myverse += ("A " if day == 1 else "And a ") + f"{phrase[0]}."
     return myverse
 
 def get_args():
