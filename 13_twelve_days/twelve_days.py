@@ -15,7 +15,7 @@ def main():
 def verse(day):
     ordinal = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth", 6: "sixth",
                7: "seventh", 8: "eighth", 9: "ninth", 10: "tenth", 11: "eleventh", 12: "twelfth"}
-    phrase = ["partridge in a pear tree",
+    phrase = ["A partridge in a pear tree.",
               "Two turtle doves",
               "Three French hens",
               "Four calling birds",
@@ -27,10 +27,19 @@ def verse(day):
               "Ten lords a leaping",
               "Eleven pipers piping",
               "Twelve drummers drumming"]
-    myverse = f"On the {ordinal[day]} day of Christmas,\nMy true love gave to me,\n"
-    myverse += ',\n'.join([phrase[i-1] for i in range(day,1,-1)])
-    myverse += ("A " if day == 1 else ",\nAnd a ") + f"{phrase[0]}."
-    return myverse
+    # Mine:
+    # myverse = f"On the {ordinal[day]} day of Christmas,\nMy true love gave to me,\n"
+    # myverse += ',\n'.join([phrase[i-1] for i in range(day,1,-1)])
+    # myverse += ("A " if day == 1 else ",\nAnd a ") + f"{phrase[0]}."
+    # return myverse
+    # Alternate: 
+    phrase_list = [f"On the {ordinal[day]} day of Christmas", 
+              "My true love gave to me"]
+    phrase_list.extend(reversed(phrase[:day]))
+    if day > 1:
+        phrase_list[-1] = "And " + phrase[0].lower()
+    return ',\n'.join(phrase_list)
+
 
 def get_args():
     parser = argparse.ArgumentParser(description="Sing the n days of Christmas",
