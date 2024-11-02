@@ -16,12 +16,13 @@ def main():
     word = args.word.lower()
 
     beg, end = split_word(word)
-    if beg == None:
+    if end == None:
         print(f'Cannot rhyme "{args.word}"')
         return
     consonants = list(string.ascii_lowercase)
     for x in list('aeiou'):
-        consonants.remove(x) 
+        consonants.remove(x)
+    pattern = "["+''.join(consonants)+"]+"
     letter_combos = consonants + \
                     str.split("bl br ch cl cr dr fl fr gl gr pl pr sc sh sk sl sm sn sp st "
                     "sw th tr tw thw wh wr sch scr shr sph spl spr squ str thr")
@@ -33,22 +34,20 @@ def main():
         print(x + end)
 
 def split_word(word):
-    word = word.lower()
-    idx = [word.find(x) for x in 'aeiou']
-    idx = [x for x in idx if x != -1]
-    if idx == []:
-        beg = None
-        end = None
+    consonants = ''.join(re.findall(('[^aeiou]'),string.ascii_lowercase))
+    res = re.match(f"([{consonants}]+)?([aeiou].*)",word.lower())
+    if res: 
+        return res.groups()[0], res.groups()[1]
     else:
-        idx = min(idx)
-        beg = word[:idx]
-        end = word[idx:]
-    return beg, end
+        return None, None
 
 def test_splword():
     assert split_word('fled') == ('fl','ed')
-    assert split_word('apple') == ('','apple')
+    assert split_word('apple') == (None,'apple')
     assert split_word('cupcake') == ('c','upcake')
+    assert split_word('pwrt') == (None, None)
+    assert split_word('123') == (None, None)
+    assert split_word('CAT') == ('c','at')
 
 def get_args():
     """Get arguments from user."""
