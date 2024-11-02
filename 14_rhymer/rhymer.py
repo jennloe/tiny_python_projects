@@ -13,16 +13,11 @@ import re
 def main():
     """Get the rhyming words."""
     args = get_args()
-    word = args.word.lower()
-
-    beg, end = split_word(word)
+    beg, end = split_word(args.word)
     if end == None:
         print(f'Cannot rhyme "{args.word}"')
         return
-    consonants = list(string.ascii_lowercase)
-    for x in list('aeiou'):
-        consonants.remove(x)
-    pattern = "["+''.join(consonants)+"]+"
+    consonants = re.findall(('[^aeiou]'),string.ascii_lowercase)
     letter_combos = consonants + \
                     str.split("bl br ch cl cr dr fl fr gl gr pl pr sc sh sk sl sm sn sp st "
                     "sw th tr tw thw wh wr sch scr shr sph spl spr squ str thr")
@@ -33,11 +28,16 @@ def main():
     for x in letter_combos:
         print(x + end)
 
+    # Notes:
+    # 'or' picks first value if true, else second value.
+    # 'and' picks first value if false, else second value. 
+
+
 def split_word(word):
     consonants = ''.join(re.findall(('[^aeiou]'),string.ascii_lowercase))
     res = re.match(f"([{consonants}]+)?([aeiou].*)",word.lower())
     if res: 
-        return res.groups()[0], res.groups()[1]
+        return res.group(1), res.group(2)
     else:
         return None, None
 
