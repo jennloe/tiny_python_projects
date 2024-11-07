@@ -27,6 +27,9 @@ def main():
 
     for x in letter_combos:
         print(x + end)
+    # Note: Python doesn't limit scope to if statements and loops!!!
+    # This works: 
+    # print(f"HEre's x again: {x}")
 
     # Notes:
     # 'or' picks first value if true, else second value.
